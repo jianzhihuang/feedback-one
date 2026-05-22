@@ -67,10 +67,10 @@
 
 # 統一平台映射
 declare -A PLATFORM_MAP=(
-  ["desktop-windows"]="mcp-feedback-enhanced-desktop.exe"
-  ["desktop-macos-intel"]="mcp-feedback-enhanced-desktop-macos-intel"
-  ["desktop-macos-arm64"]="mcp-feedback-enhanced-desktop-macos-arm64"
-  ["desktop-linux"]="mcp-feedback-enhanced-desktop-linux"
+  ["desktop-windows"]="feedback-one-desktop.exe"
+  ["desktop-macos-intel"]="feedback-one-desktop-macos-intel"
+  ["desktop-macos-arm64"]="feedback-one-desktop-macos-arm64"
+  ["desktop-linux"]="feedback-one-desktop-linux"
 )
 ```
 

@@ -102,7 +102,7 @@ class WebUIManager:
             self.port = PortManager.find_free_port_enhanced(
                 preferred_port=preferred_port, auto_cleanup=auto_cleanup, host=self.host
             )
-        self.app = FastAPI(title="MCP Feedback Enhanced")
+        self.app = FastAPI(title="Feedback One")
 
         # 設置壓縮和緩存中間件
         self._setup_compression_middleware()
@@ -1180,7 +1180,7 @@ if __name__ == "__main__":
 
 ## 🎯 任務完成摘要
 
-我已成功為 **mcp-feedback-enhanced** 專案實現了 Markdown 語法顯示功能！
+我已成功為 **feedback-one** 專案實現了 Markdown 語法顯示功能！
 
 ### ✅ 完成的功能
 

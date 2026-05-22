@@ -1,5 +1,5 @@
 /**
- * MCP Feedback Enhanced - UI 管理模組
+ * Feedback One - UI 管理模組
  * =================================
  * 
  * 處理 UI 狀態更新、指示器管理和頁籤切換

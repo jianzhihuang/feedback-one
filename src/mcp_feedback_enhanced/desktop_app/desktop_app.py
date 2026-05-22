@@ -14,13 +14,13 @@ import sys
 import time
 
 
-# 導入現有的 MCP Feedback Enhanced 模組
+# 導入現有的 Feedback One 模組
 try:
     from mcp_feedback_enhanced.debug import server_debug_log as debug_log
     from mcp_feedback_enhanced.web.main import WebUIManager, get_web_ui_manager
 except ImportError as e:
     # 在這裡無法使用 debug_log，因為導入失敗
-    sys.stderr.write(f"無法導入 MCP Feedback Enhanced 模組: {e}\n")
+    sys.stderr.write(f"無法導入 Feedback One 模組: {e}\n")
     sys.exit(1)
 
 
@@ -125,33 +125,33 @@ class DesktopApp:
 
             # 定義平台到二進制文件的映射
             if system == "windows":
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop.exe"
+                tauri_exe = desktop_dir / "feedback-one-desktop.exe"
             elif system == "darwin":  # macOS
                 # 檢測 Apple Silicon 或 Intel
                 if machine in ["arm64", "aarch64"]:
                     tauri_exe = (
-                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64"
+                        desktop_dir / "feedback-one-desktop-macos-arm64"
                     )
                 else:
                     tauri_exe = (
-                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel"
+                        desktop_dir / "feedback-one-desktop-macos-intel"
                     )
             elif system == "linux":
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop-linux"
+                tauri_exe = desktop_dir / "feedback-one-desktop-linux"
             else:
                 # 回退到通用名稱
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop"
+                tauri_exe = desktop_dir / "feedback-one-desktop"
 
             if tauri_exe.exists():
                 debug_log(f"找到打包後的 Tauri 可執行檔案: {tauri_exe}")
             else:
                 # 嘗試回退選項
                 fallback_files = [
-                    desktop_dir / "mcp-feedback-enhanced-desktop.exe",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-linux",
-                    desktop_dir / "mcp-feedback-enhanced-desktop",
+                    desktop_dir / "feedback-one-desktop.exe",
+                    desktop_dir / "feedback-one-desktop-macos-intel",
+                    desktop_dir / "feedback-one-desktop-macos-arm64",
+                    desktop_dir / "feedback-one-desktop-linux",
+                    desktop_dir / "feedback-one-desktop",
                 ]
 
                 for fallback in fallback_files:
@@ -173,7 +173,7 @@ class DesktopApp:
                 / "src-tauri"
                 / "target"
                 / "debug"
-                / "mcp-feedback-enhanced-desktop.exe"
+                / "feedback-one-desktop.exe"
             )
 
             if not tauri_exe.exists():
@@ -183,7 +183,7 @@ class DesktopApp:
                     / "src-tauri"
                     / "target"
                     / "debug"
-                    / "mcp-feedback-enhanced-desktop"
+                    / "feedback-one-desktop"
                 )
 
             if not tauri_exe.exists():
@@ -193,7 +193,7 @@ class DesktopApp:
                     / "src-tauri"
                     / "target"
                     / "release"
-                    / "mcp-feedback-enhanced-desktop.exe"
+                    / "feedback-one-desktop.exe"
                 )
                 if not tauri_exe.exists():
                     tauri_exe = (
@@ -201,7 +201,7 @@ class DesktopApp:
                         / "src-tauri"
                         / "target"
                         / "release"
-                        / "mcp-feedback-enhanced-desktop"
+                        / "feedback-one-desktop"
                     )
 
             if not tauri_exe.exists():

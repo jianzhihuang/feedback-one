@@ -1,5 +1,5 @@
 /**
- * MCP Feedback Enhanced - 主應用程式
+ * Feedback One - 主應用程式
  * =================================
  *
  * 模組化重構版本，整合所有功能模組
@@ -98,7 +98,7 @@
     FeedbackApp.prototype.init = function() {
         const self = this;
 
-        console.log('🚀 初始化 MCP Feedback Enhanced 應用程式');
+        console.log('🚀 初始化 Feedback One 應用程式');
 
         return new Promise(function(resolve, reject) {
             try {
@@ -115,7 +115,7 @@
                     })
                     .then(function() {
                         self.isInitialized = true;
-                        console.log('✅ MCP Feedback Enhanced 應用程式初始化完成');
+                        console.log('✅ Feedback One 應用程式初始化完成');
                         resolve();
                     })
                     .catch(function(error) {

@@ -1,9 +1,9 @@
 [package]
-name = "mcp-feedback-enhanced-desktop"
+name = "feedback-one-desktop"
 version = "2.4.3"
 edition = "2021"
 rust-version = "1.70"
-description = "Desktop application for MCP Feedback Enhanced using Tauri"
+description = "Desktop application for Feedback One using Tauri"
 authors = ["Minidoracat <minidora0702@gmail.com>"]
 license = "MIT"
 
@@ -14,7 +14,7 @@ crate-type = ["cdylib"]
 
 # 二進制目標
 [[bin]]
-name = "mcp-feedback-enhanced-desktop"
+name = "feedback-one-desktop"
 path = "src/main.rs"
 
 [dependencies]

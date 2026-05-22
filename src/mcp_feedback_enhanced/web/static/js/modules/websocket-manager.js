@@ -1,5 +1,5 @@
 /**
- * MCP Feedback Enhanced - WebSocket 管理模組
+ * Feedback One - WebSocket 管理模組
  * =========================================
  * 
  * 處理 WebSocket 連接、訊息傳遞和重連邏輯

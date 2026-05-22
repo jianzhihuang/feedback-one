@@ -43,19 +43,19 @@ jobs:
         include:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            binary: mcp-feedback-enhanced-desktop.exe
+            binary: feedback-one-desktop.exe
             name: windows
           - os: macos-latest
             target: x86_64-apple-darwin
-            binary: mcp-feedback-enhanced-desktop
+            binary: feedback-one-desktop
             name: macos-intel
           - os: macos-latest
             target: aarch64-apple-darwin
-            binary: mcp-feedback-enhanced-desktop
+            binary: feedback-one-desktop
             name: macos-arm64
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            binary: mcp-feedback-enhanced-desktop
+            binary: feedback-one-desktop
             name: linux
 
     runs-on: ${{ matrix.os }}
@@ -142,7 +142,7 @@ jobs:
       run: |
         cd src-tauri
         echo "🔨 開始構建 ${{ matrix.name }} (${{ matrix.target }})..."
-        cargo build --release --target ${{ matrix.target }} --bin mcp-feedback-enhanced-desktop
+        cargo build --release --target ${{ matrix.target }} --bin feedback-one-desktop
         echo "✅ 構建完成"
 
     - name: Verify build output
@@ -300,10 +300,10 @@ jobs:
 
         # 定義平台映射
         declare -A PLATFORM_MAP=(
-          ["desktop-windows"]="mcp-feedback-enhanced-desktop.exe"
-          ["desktop-macos-intel"]="mcp-feedback-enhanced-desktop-macos-intel"
-          ["desktop-macos-arm64"]="mcp-feedback-enhanced-desktop-macos-arm64"
-          ["desktop-linux"]="mcp-feedback-enhanced-desktop-linux"
+          ["desktop-windows"]="feedback-one-desktop.exe"
+          ["desktop-macos-intel"]="feedback-one-desktop-macos-intel"
+          ["desktop-macos-arm64"]="feedback-one-desktop-macos-arm64"
+          ["desktop-linux"]="feedback-one-desktop-linux"
         )
 
         # 複製並重命名二進制文件
@@ -315,7 +315,7 @@ jobs:
           # 查找該平台的二進制文件
           BINARY_FILE=""
           if [ -d "desktop-artifacts/$platform_dir" ]; then
-            BINARY_FILE=$(find "desktop-artifacts/$platform_dir" -name "mcp-feedback-enhanced-desktop*" -type f | head -1)
+            BINARY_FILE=$(find "desktop-artifacts/$platform_dir" -name "feedback-one-desktop*" -type f | head -1)
           fi
 
           if [ -n "$BINARY_FILE" ] && [ -f "$BINARY_FILE" ]; then

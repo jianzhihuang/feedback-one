@@ -1,5 +1,5 @@
 /**
- * MCP Feedback Enhanced - 會話管理模組（重構版）
+ * Feedback One - 會話管理模組（重構版）
  * =============================================
  *
  * 整合會話數據管理、UI 渲染和面板控制功能
@@ -862,7 +862,7 @@
      */
     SessionManager.prototype.formatCurrentSessionContent = function(sessionData) {
         const lines = [];
-        lines.push('# MCP Feedback Enhanced - 当前会话内容');
+        lines.push('# Feedback One - 当前会话内容');
         lines.push('');
         lines.push(`**会话ID**: ${sessionData.session_id || 'N/A'}`);
         lines.push(`**项目目录**: ${sessionData.project_directory || 'N/A'}`);
@@ -898,7 +898,7 @@
      */
     SessionManager.prototype.formatCurrentUserContent = function(userMessages) {
         const lines = [];
-        lines.push('# MCP Feedback Enhanced - 用户发送内容');
+        lines.push('# Feedback One - 用户发送内容');
         lines.push('');
 
         userMessages.forEach((msg, index) => {

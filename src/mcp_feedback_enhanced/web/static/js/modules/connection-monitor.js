@@ -1,5 +1,5 @@
 /**
- * MCP Feedback Enhanced - 連線監控模組
+ * Feedback One - 連線監控模組
  * ===================================
  * 
  * 處理 WebSocket 連線狀態監控、品質檢測和診斷功能

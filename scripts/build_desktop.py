@@ -206,10 +206,10 @@ def build_tauri_app_multiplatform(project_root: Path, release: bool = True):
 
     # 定義目標平台
     targets = [
-        ("x86_64-pc-windows-msvc", "mcp-feedback-enhanced-desktop.exe"),
-        ("x86_64-apple-darwin", "mcp-feedback-enhanced-desktop"),
-        ("aarch64-apple-darwin", "mcp-feedback-enhanced-desktop"),
-        ("x86_64-unknown-linux-gnu", "mcp-feedback-enhanced-desktop"),
+        ("x86_64-pc-windows-msvc", "feedback-one-desktop.exe"),
+        ("x86_64-apple-darwin", "feedback-one-desktop"),
+        ("aarch64-apple-darwin", "feedback-one-desktop"),
+        ("x86_64-unknown-linux-gnu", "feedback-one-desktop"),
     ]
 
     successful_builds = []
@@ -231,7 +231,7 @@ def build_tauri_app_multiplatform(project_root: Path, release: bool = True):
             "cargo",
             "build",
             "--bin",
-            "mcp-feedback-enhanced-desktop",
+            "feedback-one-desktop",
             "--target",
             target,
         ]
@@ -282,10 +282,10 @@ def copy_multiplatform_artifacts(
 
     # 定義平台到文件名的映射
     platform_mapping = {
-        "x86_64-pc-windows-msvc": "mcp-feedback-enhanced-desktop.exe",
-        "x86_64-apple-darwin": "mcp-feedback-enhanced-desktop-macos-intel",
-        "aarch64-apple-darwin": "mcp-feedback-enhanced-desktop-macos-arm64",
-        "x86_64-unknown-linux-gnu": "mcp-feedback-enhanced-desktop-linux",
+        "x86_64-pc-windows-msvc": "feedback-one-desktop.exe",
+        "x86_64-apple-darwin": "feedback-one-desktop-macos-intel",
+        "aarch64-apple-darwin": "feedback-one-desktop-macos-arm64",
+        "x86_64-unknown-linux-gnu": "feedback-one-desktop-linux",
     }
 
     copied_files = []
@@ -350,7 +350,7 @@ def copy_desktop_python_module(project_root: Path):
 def main():
     """主函數"""
     parser = argparse.ArgumentParser(
-        description="構建 MCP Feedback Enhanced 桌面應用程式",
+        description="構建 Feedback One 桌面應用程式",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 範例:

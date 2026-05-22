@@ -7,6 +7,8 @@ import time
 
 import pytest
 
+from mcp_feedback_enhanced.server import process_images
+from mcp_feedback_enhanced.web.models import WebFeedbackSession
 from tests.fixtures.test_data import TestData
 from tests.helpers.test_utils import TestUtils
 
@@ -161,6 +163,43 @@ class TestWebFeedbackSession:
         assert session.images == TestData.SAMPLE_FEEDBACK["images"]
         assert session.settings == TestData.SAMPLE_FEEDBACK["settings"]
         assert session.status == SessionStatus.FEEDBACK_SUBMITTED
+
+    @pytest.mark.asyncio
+    async def test_session_feedback_submission_preserves_image_type(
+        self, test_project_dir
+    ):
+        """測試回饋提交會保留圖片 MIME 類型"""
+        session = WebFeedbackSession(
+            "test-session", str(test_project_dir), TestData.SAMPLE_SESSION["summary"]
+        )
+        image_data = {
+            "name": "clipboard-image",
+            "data": TestData.SAMPLE_IMAGE_BASE64.split(",", 1)[1],
+            "size": 70,
+            "type": "image/jpeg",
+        }
+
+        await session.submit_feedback(
+            TestData.SAMPLE_FEEDBACK["feedback"],
+            [image_data],
+            TestData.SAMPLE_FEEDBACK["settings"],
+        )
+
+        assert session.images[0]["type"] == "image/jpeg"
+
+    def test_process_images_prefers_frontend_mime_type(self):
+        """測試圖片轉換優先使用前端 MIME 類型"""
+        image_data = {
+            "name": "clipboard-image",
+            "data": TestData.SAMPLE_IMAGE_BASE64.split(",", 1)[1],
+            "size": 70,
+            "type": "image/jpeg",
+        }
+
+        images = process_images([image_data])
+
+        assert len(images) == 1
+        assert images[0].to_image_content().mimeType == "image/jpeg"
 
 
 class TestWebUIRoutes:

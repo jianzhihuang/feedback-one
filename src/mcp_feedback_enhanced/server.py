@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MCP Feedback Enhanced 伺服器主要模組
+Feedback One 伺服器主要模組
 
 此模組提供 MCP (Model Context Protocol) 的增強回饋收集功能，
 支援智能環境檢測，自動使用 Web UI 介面。
@@ -397,12 +397,32 @@ def process_images(images_data: list[dict]) -> list[MCPImage]:
                 debug_log(f"圖片 {i} 數據為空，跳過")
                 continue
 
-            # 根據文件名推斷格式
+            # 優先使用前端傳來的 MIME 類型；沒有 MIME 時再根據文件名推斷格式
             file_name = img.get("name", "image.png")
-            if file_name.lower().endswith((".jpg", ".jpeg")):
+            mime_from_frontend = img.get("type", "")
+            if isinstance(mime_from_frontend, str):
+                mime_from_frontend = mime_from_frontend.split(";")[0].strip().lower()
+                if mime_from_frontend == "image/jpg":
+                    mime_from_frontend = "image/jpeg"
+            else:
+                mime_from_frontend = ""
+
+            if mime_from_frontend and mime_from_frontend.startswith("image/"):
+                image_format = mime_from_frontend.split("/", 1)[1]
+            elif file_name.lower().endswith((".jpg", ".jpeg")):
                 image_format = "jpeg"
             elif file_name.lower().endswith(".gif"):
                 image_format = "gif"
+            elif file_name.lower().endswith(".webp"):
+                image_format = "webp"
+            elif file_name.lower().endswith(".bmp"):
+                image_format = "bmp"
+            elif file_name.lower().endswith((".tiff", ".tif")):
+                image_format = "tiff"
+            elif file_name.lower().endswith(".svg"):
+                image_format = "svg+xml"
+            elif file_name.lower().endswith(".ico"):
+                image_format = "x-icon"
             else:
                 image_format = "png"  # 默認使用 PNG
 

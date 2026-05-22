@@ -2,7 +2,7 @@
 
 ## 🏗️ 四層架構組件
 
-MCP Feedback Enhanced 採用清晰的四層架構設計，每層負責特定的功能領域。本文檔詳細說明各層組件的實現細節、職責分工和交互機制。
+Feedback One 採用清晰的四層架構設計，每層負責特定的功能領域。本文檔詳細說明各層組件的實現細節、職責分工和交互機制。
 
 ### 架構設計原則
 
@@ -110,7 +110,7 @@ graph TB
 **架構實現**：
 ```python
 # 基於 FastMCP 的服務器實現
-mcp = FastMCP("mcp-feedback-enhanced")
+mcp = FastMCP("feedback-one")
 
 @mcp.tool()
 async def interactive_feedback(
@@ -210,7 +210,7 @@ class I18nManager:
 ```json
 {
     "app": {
-        "title": "MCP Feedback Enhanced",
+        "title": "Feedback One",
         "subtitle": "AI 輔助開發回饋收集器"
     },
     "buttons": {
@@ -412,7 +412,7 @@ class WebSocketMessage:
 def create_app(manager: 'WebUIManager') -> FastAPI:
     """創建 FastAPI 應用實例"""
     app = FastAPI(
-        title="MCP Feedback Enhanced",
+        title="Feedback One",
         description="AI 輔助開發回饋收集系統",
         version="2.3.0"
     )
@@ -724,7 +724,7 @@ graph LR
         <!-- 頁面頭部 -->
         <header class="header">
             <div class="header-content">
-                <h1 class="title" data-i18n="app.title">MCP Feedback Enhanced</h1>
+                <h1 class="title" data-i18n="app.title">Feedback One</h1>
                 <div class="project-info">
                     <span data-i18n="app.projectDirectory">專案目錄</span>: {{ project_directory }}
                 </div>

@@ -92,7 +92,7 @@ class I18nManager {
         return {
             'zh-TW': {
                 'app': {
-                    'title': 'MCP Feedback Enhanced',
+                    'title': 'Feedback One',
                     'projectDirectory': '專案目錄'
                 },
                 'tabs': {
