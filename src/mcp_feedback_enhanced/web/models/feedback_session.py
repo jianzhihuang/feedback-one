@@ -510,6 +510,18 @@ class WebFeedbackSession:
                 f"等待用戶回饋超時（{actual_timeout}秒），介面已自動關閉"
             )
 
+        except asyncio.CancelledError:
+            # MCP 客戶端（如 Copilot CLI）取消了此請求
+            # CancelledError 是 BaseException，不是 Exception，必須單獨處理
+            debug_log(f"會話 {self.session_id} 被客戶端取消，清理資源...")
+            # 解除 run_in_executor 中阻塞的線程，避免 thread leak
+            self.feedback_completed.set()
+            # 使用 asyncio.shield 保護清理操作，防止清理期間再次被取消而中斷
+            try:
+                await asyncio.shield(self._cleanup_resources_on_timeout())
+            except asyncio.CancelledError:
+                pass  # 清理過程中再次被取消，忽略
+            raise
         except Exception as e:
             # 任何異常都要確保清理資源
             debug_log(f"會話 {self.session_id} 發生異常: {e}")

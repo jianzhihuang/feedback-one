@@ -3,7 +3,7 @@
     "feedback-one": {
       "command": "uvx",
       "args": ["feedback-one@latest"],
-      "timeout": 600,
+      "timeout": 600000,
       "env": {
         "MCP_DESKTOP_MODE": "false",
         "MCP_WEB_HOST": "127.0.0.1",

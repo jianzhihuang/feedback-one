@@ -130,6 +130,14 @@ else:
 
 mcp: Any = FastMCP(SERVER_NAME)
 
+# Workaround for Copilot CLI Bug #1378:
+# FastMCP's LowLevelServer sets tools_changed=True by default, which causes
+# Copilot CLI to reset its per-server timeout to the default value (~60s) on
+# every tools/list_changed notification. Disabling this declaration prevents
+# the bug from being triggered, allowing the configured "timeout" in
+# ~/.copilot/mcp-config.json to remain effective.
+mcp._mcp_server.notification_options.tools_changed = False
+
 
 # ===== 工具函數 =====
 def is_wsl_environment() -> bool:
