@@ -214,7 +214,7 @@ class TestWebUIRoutes:
         response = client.get("/")
 
         assert response.status_code == 200
-        assert "MCP Feedback Enhanced" in response.text
+        assert "Feedback Two" in response.text
 
     @pytest.mark.asyncio
     async def test_index_route_with_session(self, web_ui_manager, test_project_dir):
@@ -290,3 +290,4 @@ class TestWebUIUtilities:
             # 缺少必要字段
         }
         assert TestUtils.validate_session_info(invalid_session) == False
+

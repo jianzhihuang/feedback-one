@@ -38,7 +38,7 @@ class TestWebUIIntegration:
             async with session.get(f"{base_url}/") as response:
                 assert response.status == 200
                 text = await response.text()
-                assert "MCP Feedback Enhanced" in text
+                assert "Feedback Two" in text
 
             # 測試靜態文件
             async with session.get(f"{base_url}/static/css/style.css") as response:
@@ -236,7 +236,7 @@ class TestWebUIErrorHandling:
             async with session.get(f"{base_url}/") as response:
                 assert response.status == 200
                 text = await response.text()
-                assert "MCP Feedback Enhanced" in text
+                assert "Feedback Two" in text
 
             # 測試當前會話 API 應該返回無會話狀態
             async with session.get(f"{base_url}/api/current-session") as response:
@@ -321,3 +321,4 @@ class TestWebUIPerformance:
         # 驗證最後一個會話是當前活躍會話
         current_session = web_ui_manager.get_current_session()
         assert current_session.session_id == session_ids[-1]
+

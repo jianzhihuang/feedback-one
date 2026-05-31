@@ -92,7 +92,7 @@ class I18nManager {
         return {
             'zh-TW': {
                 'app': {
-                    'title': 'Feedback One',
+                    'title': 'Feedback Two',
                     'projectDirectory': '專案目錄'
                 },
                 'tabs': {

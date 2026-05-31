@@ -1,5 +1,5 @@
 [project]
-name = "feedback-one"
+name = "feedback-two"
 version = "2.6.5"
 description = "Enhanced MCP server for interactive user feedback and command execution in AI-assisted development, featuring dual interface support (Web UI and Desktop Application) with intelligent environment detection and cross-platform compatibility."
 readme = "README.md"
@@ -43,12 +43,12 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Minidoracat/feedback-one"
-Repository = "https://github.com/Minidoracat/feedback-one"
-Issues = "https://github.com/Minidoracat/feedback-one/issues"
+Homepage = "https://github.com/Minidoracat/feedback-two"
+Repository = "https://github.com/Minidoracat/feedback-two"
+Issues = "https://github.com/Minidoracat/feedback-two/issues"
 
 [project.scripts]
-feedback-one = "mcp_feedback_enhanced.__main__:main"
+feedback-two = "mcp_feedback_enhanced.__main__:main"
 interactive-feedback-mcp = "mcp_feedback_enhanced.__main__:main"
 
 [build-system]
@@ -313,3 +313,4 @@ module = "tests.*"
 disallow_untyped_defs = false
 disallow_incomplete_defs = false
 disallow_untyped_decorators = false
+

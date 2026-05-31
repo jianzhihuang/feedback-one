@@ -83,13 +83,13 @@ jobs:
           fi
           [ -z "$NOTES" ] && NOTES="- Version bump to ${NEW_VERSION}"
           {
-            echo "## feedback-one ${TAG}"
+            echo "## feedback-two ${TAG}"
             echo ""
-            echo "📦 [PyPI](https://pypi.org/project/feedback-one/${NEW_VERSION}/)"
+            echo "📦 [PyPI](https://pypi.org/project/feedback-two/${NEW_VERSION}/)"
             echo ""
             echo "### 使用方式"
             echo '```json'
-            echo '{"command": "uvx", "args": ["feedback-one@latest"]}'
+            echo '{"command": "uvx", "args": ["feedback-two@latest"]}'
             echo '```'
             echo ""
             echo "### 變更內容"
@@ -98,5 +98,6 @@ jobs:
           git tag "$TAG"
           git push origin "$TAG"
           gh release create "$TAG" dist/* \
-            --title "feedback-one ${TAG}" \
+            --title "feedback-two ${TAG}" \
             --notes-file /tmp/release-notes.md
+

@@ -23,6 +23,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from ..debug import web_debug_log as debug_log
+from ..i18n import get_i18n_manager
 from ..utils.error_handler import ErrorHandler, ErrorType
 from ..utils.memory_monitor import get_memory_monitor
 from .models import CleanupReason, SessionStatus, WebFeedbackSession
@@ -102,7 +103,7 @@ class WebUIManager:
             self.port = PortManager.find_free_port_enhanced(
                 preferred_port=preferred_port, auto_cleanup=auto_cleanup, host=self.host
             )
-        self.app = FastAPI(title="Feedback One")
+        self.app = FastAPI(title="Feedback Two")
 
         # 設置壓縮和緩存中間件
         self._setup_compression_middleware()
@@ -148,7 +149,8 @@ class WebUIManager:
     def _init_basic_components(self):
         """同步初始化基本組件"""
         # 基本組件初始化（必須同步）
-        # 移除 i18n 管理器，因為翻譯已移至前端
+        # 保留 i18n 屬性以維持向後兼容（翻譯實際仍由前端主導）
+        self.i18n = get_i18n_manager()
 
         # 設置靜態文件和模板（必須同步）
         self._setup_static_files()
@@ -1180,7 +1182,7 @@ if __name__ == "__main__":
 
 ## 🎯 任務完成摘要
 
-我已成功為 **feedback-one** 專案實現了 Markdown 語法顯示功能！
+我已成功為 **feedback-two** 專案實現了 Markdown 語法顯示功能！
 
 ### ✅ 完成的功能
 
@@ -1234,3 +1236,4 @@ element.innerHTML = renderedContent;
             stop_web_ui()
 
     asyncio.run(main())
+

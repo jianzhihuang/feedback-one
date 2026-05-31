@@ -1,4 +1,4 @@
-# Feedback One
+# Feedback Two
 
 **🌐 Language / 語言切換:** **English** | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md)
 
@@ -21,7 +21,7 @@ This is an [MCP server](https://modelcontextprotocol.io/) that establishes **fee
 **Supported Platforms:** [Cursor](https://www.cursor.com) | [Cline](https://cline.bot) | [Windsurf](https://windsurf.com) | [Augment](https://www.augmentcode.com) | [Trae](https://www.trae.ai)
 
 ### 🔄 Workflow
-1. **AI Call** → `feedback-one` tool
+1. **AI Call** → `feedback-two` tool
 2. **Interface Launch** → Auto-open desktop application or browser interface (based on configuration)
 3. **Smart Interaction** → Prompt selection, text input, image upload, auto-submit
 4. **Real-time Feedback** → WebSocket connection delivers information to AI instantly
@@ -101,9 +101,9 @@ pip install uv
 ```json
 {
   "mcpServers": {
-    "feedback-one": {
+    "feedback-two": {
       "command": "uvx",
-      "args": ["feedback-one@latest"],
+      "args": ["feedback-two@latest"],
       "timeout": 600,
       "autoApprove": ["interactive_feedback"]
     }
@@ -115,9 +115,9 @@ pip install uv
 ```json
 {
   "mcpServers": {
-    "feedback-one": {
+    "feedback-two": {
       "command": "uvx",
-      "args": ["feedback-one@latest"],
+      "args": ["feedback-two@latest"],
       "timeout": 600,
       "env": {
         "MCP_DEBUG": "false",
@@ -135,9 +135,9 @@ pip install uv
 ```json
 {
   "mcpServers": {
-    "feedback-one": {
+    "feedback-two": {
       "command": "uvx",
-      "args": ["feedback-one@latest"],
+      "args": ["feedback-two@latest"],
       "timeout": 600,
       "env": {
         "MCP_DESKTOP_MODE": "true",
@@ -161,7 +161,7 @@ For optimal results, add the following rules to your AI assistant:
 ```
 # MCP Interactive Feedback Rules
 
-follow feedback-one instructions
+follow feedback-two instructions
 ```
 
 ## ⚙️ Advanced Settings
@@ -195,25 +195,25 @@ follow feedback-one instructions
 ### Testing Options
 ```bash
 # Version check
-uvx feedback-one@latest version       # Check version
+uvx feedback-two@latest version       # Check version
 
 # Interface testing
-uvx feedback-one@latest test --web    # Test Web UI (auto continuous running)
-uvx feedback-one@latest test --desktop # Test desktop application (v2.5.0 new feature)
+uvx feedback-two@latest test --web    # Test Web UI (auto continuous running)
+uvx feedback-two@latest test --desktop # Test desktop application (v2.5.0 new feature)
 
 # Debug mode
-MCP_DEBUG=true uvx feedback-one@latest test
+MCP_DEBUG=true uvx feedback-two@latest test
 
 # Specify language for testing
-MCP_LANGUAGE=en uvx feedback-one@latest test --web    # Force English interface
-MCP_LANGUAGE=zh-TW uvx feedback-one@latest test --web  # Force Traditional Chinese
-MCP_LANGUAGE=zh-CN uvx feedback-one@latest test --web  # Force Simplified Chinese
+MCP_LANGUAGE=en uvx feedback-two@latest test --web    # Force English interface
+MCP_LANGUAGE=zh-TW uvx feedback-two@latest test --web  # Force Traditional Chinese
+MCP_LANGUAGE=zh-CN uvx feedback-two@latest test --web  # Force Simplified Chinese
 ```
 
 ### Developer Installation
 ```bash
-git clone https://github.com/Minidoracat/feedback-one.git
-cd feedback-one
+git clone https://github.com/Minidoracat/feedback-two.git
+cd feedback-two
 uv sync
 ```
 
@@ -226,8 +226,8 @@ make test-desktop-func                                   # Desktop application f
 
 # Or use direct commands
 uv run python -m mcp_feedback_enhanced test              # Standard functional testing
-uvx --no-cache --with-editable . feedback-one test --web   # Web UI testing (continuous running)
-uvx --no-cache --with-editable . feedback-one test --desktop # Desktop application testing
+uvx --no-cache --with-editable . feedback-two test --web   # Web UI testing (continuous running)
+uvx --no-cache --with-editable . feedback-two test --desktop # Desktop application testing
 
 # Desktop application build (v2.5.0 new feature)
 make build-desktop                                       # Build desktop application (debug mode)
@@ -275,9 +275,9 @@ Set `"MCP_WEB_HOST": "0.0.0.0"` in MCP configuration to allow remote access:
 ```json
 {
   "mcpServers": {
-    "feedback-one": {
+    "feedback-two": {
       "command": "uvx",
-      "args": ["feedback-one@latest"],
+      "args": ["feedback-two@latest"],
       "timeout": 600,
       "env": {
         "MCP_WEB_HOST": "0.0.0.0",
@@ -314,9 +314,9 @@ A: v2.5.0 introduces cross-platform desktop application support. Set `"MCP_DESKT
 ```json
 {
   "mcpServers": {
-    "feedback-one": {
+    "feedback-two": {
       "command": "uvx",
-      "args": ["feedback-one@latest"],
+      "args": ["feedback-two@latest"],
       "timeout": 600,
       "env": {
         "MCP_DESKTOP_MODE": "true",
@@ -330,14 +330,14 @@ A: v2.5.0 introduces cross-platform desktop application support. Set `"MCP_DESKT
 **Configuration File Example**: [examples/mcp-config-desktop.json](examples/mcp-config-desktop.json)
 
 **Q: How to use legacy PyQt6 GUI interface?**
-A: v2.4.0 completely removed PyQt6 GUI dependencies. To use legacy GUI, specify v2.3.0 or earlier: `uvx feedback-one@2.3.0`
+A: v2.4.0 completely removed PyQt6 GUI dependencies. To use legacy GUI, specify v2.3.0 or earlier: `uvx feedback-two@2.3.0`
 **Note**: Legacy versions don't include new features (prompt management, auto-submit, session management, desktop application, etc.).
 
 **Q: "Unexpected token 'D'" error appears**
 A: Debug output interference. Set `MCP_DEBUG=false` or remove the environment variable.
 
 **Q: Chinese character garbled text**
-A: Fixed in v2.0.3. Update to latest version: `uvx feedback-one@latest`
+A: Fixed in v2.0.3. Update to latest version: `uvx feedback-two@latest`
 
 **Q: Window disappears or positioning errors in multi-screen environment**
 A: Fixed in v2.1.1. Go to "⚙️ Settings" tab, check "Always show window at primary screen center" to resolve. Especially suitable for T-shaped screen arrangements and other complex multi-screen configurations.
@@ -389,20 +389,20 @@ If you find it useful, please:
 
 ### Contributors
 **penn201500** - [GitHub @penn201500](https://github.com/penn201500)
-- 🎯 Auto-focus input box feature ([PR #39](https://github.com/Minidoracat/feedback-one/pull/39))
+- 🎯 Auto-focus input box feature ([PR #39](https://github.com/Minidoracat/feedback-two/pull/39))
 
 **leo108** - [GitHub @leo108](https://github.com/leo108)
-- 🌐 SSH Remote Development Support (`MCP_WEB_HOST` environment variable) ([PR #113](https://github.com/Minidoracat/feedback-one/pull/113))
+- 🌐 SSH Remote Development Support (`MCP_WEB_HOST` environment variable) ([PR #113](https://github.com/Minidoracat/feedback-two/pull/113))
 
 **Alsan** - [GitHub @Alsan](https://github.com/Alsan)
-- 🍎 macOS PyO3 Compilation Configuration Support ([PR #93](https://github.com/Minidoracat/feedback-one/pull/93))
+- 🍎 macOS PyO3 Compilation Configuration Support ([PR #93](https://github.com/Minidoracat/feedback-two/pull/93))
 
 **fireinice** - [GitHub @fireinice](https://github.com/fireinice)
-- 📝 Tool Documentation Optimization (LLM instructions moved to docstring) ([PR #105](https://github.com/Minidoracat/feedback-one/pull/105))
+- 📝 Tool Documentation Optimization (LLM instructions moved to docstring) ([PR #105](https://github.com/Minidoracat/feedback-two/pull/105))
 
 ### Community Support
 - **Discord:** [https://discord.gg/Gur2V67](https://discord.gg/Gur2V67)
-- **Issues:** [GitHub Issues](https://github.com/Minidoracat/feedback-one/issues)
+- **Issues:** [GitHub Issues](https://github.com/Minidoracat/feedback-two/issues)
 
 ## 📄 License
 
@@ -410,7 +410,8 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Minidoracat/feedback-one&type=Date)](https://star-history.com/#Minidoracat/feedback-one&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Minidoracat/feedback-two&type=Date)](https://star-history.com/#Minidoracat/feedback-two&Date)
 
 ---
 **🌟 Welcome to Star and share with more developers!**
+

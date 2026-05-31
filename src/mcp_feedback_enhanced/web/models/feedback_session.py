@@ -236,12 +236,31 @@ class WebFeedbackSession:
 
         self.last_activity = time.time()
 
-        # 如果會話變為已提交狀態，重置清理定時器
-        if next_status == SessionStatus.FEEDBACK_SUBMITTED:
+        # 狀態更新後都重置清理定時器，確保活躍會話有新的生命週期
+        if next_status in [SessionStatus.ACTIVE, SessionStatus.FEEDBACK_SUBMITTED]:
             self._schedule_auto_cleanup()
 
         debug_log(
             f"✅ 會話 {self.session_id} 狀態流轉: {old_status.value} → {next_status.value} - {self.status_message}"
+        )
+        return True
+
+    def update_status(self, status: SessionStatus, message: str | None = None) -> bool:
+        """直接更新會話狀態（向後兼容 API）"""
+        old_status = self.status
+        self.status = status
+        self.last_activity = time.time()
+
+        if message:
+            self.status_message = message
+        else:
+            self.status_message = f"狀態更新為 {status.value}"
+
+        if status in [SessionStatus.ACTIVE, SessionStatus.FEEDBACK_SUBMITTED]:
+            self._schedule_auto_cleanup()
+
+        debug_log(
+            f"✅ 會話 {self.session_id} 狀態更新: {old_status.value} → {status.value} - {self.status_message}"
         )
         return True
 
@@ -547,8 +566,10 @@ class WebFeedbackSession:
         self.settings = settings or {}
         self.images = self._process_images(images)
 
-        # 進入下一步：等待中 → 已提交反饋
-        self.next_step("已送出反饋，等待下次 MCP 調用")
+        # 提交反饋後直接標記為已提交，避免依賴當前狀態造成語意偏差
+        self.update_status(
+            SessionStatus.FEEDBACK_SUBMITTED, "已送出反饋，等待下次 MCP 調用"
+        )
 
         self.feedback_completed.set()
 

@@ -34,7 +34,7 @@ if sys.platform == "win32":
 def main():
     """主程式入口點"""
     parser = argparse.ArgumentParser(
-        description="Feedback One - 互動式回饋收集 MCP 伺服器"
+        description="Feedback Two - 互動式回饋收集 MCP 伺服器"
     )
 
     subparsers = parser.add_subparsers(dest="command", help="可用命令")
@@ -183,7 +183,7 @@ def process_feedback(data):
 4. 渲染內容
 
 #### 連結和引用
-- 專案連結：[Feedback One](https://github.com/example/feedback-one)
+- 專案連結：[Feedback Two](https://github.com/example/feedback-two)
 - 文檔連結：[Marked.js 官方文檔](https://marked.js.org/)
 
 > **重要提示：** 所有 HTML 輸出都經過 DOMPurify 清理，確保安全性。
@@ -317,7 +317,7 @@ def test_desktop_app():
                 print("💡 可能的原因：")
                 print("   1. 此版本不包含桌面應用程式二進制檔案")
                 print("   2. 請使用包含桌面應用的版本，或使用 Web 模式")
-                print("   3. Web 模式指令：uvx feedback-one test --web")
+                print("   3. Web 模式指令：uvx feedback-two test --web")
                 return False
 
             print("✅ 桌面應用程式模組導入成功")
@@ -410,10 +410,11 @@ def show_version():
     """顯示版本資訊"""
     from . import __author__, __version__
 
-    print(f"Feedback One v{__version__}")
+    print(f"Feedback Two v{__version__}")
     print(f"作者: {__author__}")
-    print("GitHub: https://github.com/Minidoracat/feedback-one")
+    print("GitHub: https://github.com/Minidoracat/feedback-two")
 
 
 if __name__ == "__main__":
     main()
+

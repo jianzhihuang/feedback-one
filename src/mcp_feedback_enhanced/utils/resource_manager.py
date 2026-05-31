@@ -374,7 +374,8 @@ class ResourceManager:
 
                 # 檢查文件年齡
                 file_age = current_time - os.path.getmtime(file_path)
-                if file_age > max_age:
+                should_cleanup = max_age <= 0 or file_age >= max_age
+                if should_cleanup:
                     os.remove(file_path)
                     files_to_remove.add(file_path)
                     cleaned_count += 1

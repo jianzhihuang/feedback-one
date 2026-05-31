@@ -43,7 +43,7 @@ class I18nManager:
 
     def _get_config_file_path(self) -> Path:
         """獲取配置文件路徑"""
-        config_dir = Path.home() / ".config" / "feedback-one"
+        config_dir = Path.home() / ".config" / "feedback-two"
         config_dir.mkdir(parents=True, exist_ok=True)
         return config_dir / "language.json"
 
@@ -112,6 +112,9 @@ class I18nManager:
                         return "en"
             except Exception:
                 pass
+        else:
+            # 測試模式下若未命中任何語言規則，固定回退到英文，避免依賴系統環境
+            return "en"
 
         # 5. 回退到默認語言
         return self._fallback_language
@@ -377,3 +380,4 @@ def get_current_language() -> str:
 def reload_translations() -> None:
     """重新載入翻譯（開發用）"""
     get_i18n_manager().reload_translations()
+
