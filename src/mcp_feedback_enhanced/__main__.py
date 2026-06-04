@@ -100,7 +100,7 @@ def run_tests(args):
 
     if args.web:
         print("🧪 執行 Web UI 測試...")
-        success = test_web_ui_simple()
+        success = test_web_ui_simple(timeout=args.timeout)
         if not success:
             sys.exit(1)
     elif args.desktop:
@@ -117,7 +117,7 @@ def run_tests(args):
         sys.exit(1)
 
 
-def test_web_ui_simple():
+def test_web_ui_simple(timeout: int = 60):
     """簡單的 Web UI 測試"""
     try:
         import tempfile
@@ -239,16 +239,22 @@ def process_feedback(data):
                         print(f"💡 請手動開啟瀏覽器並訪問: {url}")
 
                     print("📝 Web UI 測試完成，進入持續模式...")
-                    print("💡 提示：服務器將持續運行，可在瀏覽器中測試互動功能")
-                    print("💡 按 Ctrl+C 停止服務器")
+                    if timeout > 0:
+                        print(f"💡 提示：服務器將運行 {timeout} 秒後自動停止（或按 Ctrl+C 提前停止）")
+                    else:
+                        print("💡 提示：服務器將持續運行，可在瀏覽器中測試互動功能")
+                        print("💡 按 Ctrl+C 停止服務器")
 
                     try:
-                        # 保持服務器運行
-                        while True:
+                        elapsed = 0
+                        while timeout <= 0 or elapsed < timeout:
                             time.sleep(1)
+                            elapsed += 1
+                        if timeout > 0:
+                            print(f"\n⏱️  已達到 {timeout} 秒 timeout，自動停止服務器...")
                     except KeyboardInterrupt:
                         print("\n🛑 停止服務器...")
-                        return True
+                    return True
                 else:
                     print("❌ Web 服務器啟動失敗")
                     return False
