@@ -32,14 +32,30 @@ jobs:
           MINOR=$(echo "$CURRENT" | cut -d. -f2)
           PATCH=$(echo "$CURRENT" | cut -d. -f3)
 
-          if [ "$PATCH" -ge 9 ]; then
-            MINOR=$((MINOR + 1))
-            PATCH=0
-          else
-            PATCH=$((PATCH + 1))
-          fi
+          # Make sure we have all tags so we never reuse an already-released version
+          git fetch --tags --force origin >/dev/null 2>&1 || true
 
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          tag_exists() {
+            git rev-parse -q --verify "refs/tags/v$1" >/dev/null 2>&1 || \
+            git ls-remote --exit-code --tags origin "refs/tags/v$1" >/dev/null 2>&1
+          }
+
+          # Increment version, skipping any version whose tag already exists
+          while :; do
+            if [ "$PATCH" -ge 9 ]; then
+              MINOR=$((MINOR + 1))
+              PATCH=0
+            else
+              PATCH=$((PATCH + 1))
+            fi
+            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+            if tag_exists "$NEW_VERSION"; then
+              echo "Tag v$NEW_VERSION already exists, skipping"
+            else
+              break
+            fi
+          done
+
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
 
@@ -67,7 +83,7 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
           python -m pip install --upgrade twine
-          twine upload dist/*
+          twine upload --skip-existing dist/*
 
       - name: Create GitHub Release
         env:
@@ -95,8 +111,17 @@ jobs:
             echo "### 變更內容"
             echo "${NOTES}"
           } > /tmp/release-notes.md
-          git tag "$TAG"
-          git push origin "$TAG"
-          gh release create "$TAG" dist/* \
-            --title "feedback-one ${TAG}" \
-            --notes-file /tmp/release-notes.md
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1 \
+             || git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skipping tag creation"
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, skipping release creation"
+          else
+            gh release create "$TAG" dist/* \
+              --title "feedback-one ${TAG}" \
+              --notes-file /tmp/release-notes.md
+          fi
